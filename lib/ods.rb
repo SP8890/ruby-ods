@@ -3,7 +3,7 @@ require 'forwardable'
 require 'rubygems'
 require 'nokogiri'
 require 'nokogiri_ext'
-require 'zip/zip'
+require 'zip'
 require 'fileutils'
 
 class Ods
@@ -44,7 +44,7 @@ class Ods
 
   def initialize(path)
     @path = path
-    Zip::ZipFile.open(@path) do |zip|
+    Zip::File.open(@path) do |zip|
       @content = Nokogiri::XML::Document.parse(zip.read('content.xml'))
     end
     @sheets = []
@@ -71,7 +71,7 @@ class Ods
       column.set_attr('repeated', max_length)
     end
 
-    Zip::ZipFile.open(dest) do |zip|
+    Zip::File.open(dest) do |zip|
       zip.get_output_stream('content.xml') do |io|
         io << @content.to_s
       end
