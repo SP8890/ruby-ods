@@ -22,9 +22,9 @@ This version only use string of cell format.
     ods = Ods.new('some_document.ods')
 
     sheet = ods.sheets[0]
-    sheet[3, :A].text #=> get A3 cell value
-    sheet[4, :B].text = 'foobar'
-    sheet[4, :B].text #=> foobar
+    sheet[3, :A].value #=> get A3 cell value
+    sheet[4, :B].value = 'foobar'
+    sheet[4, :B].value #=> foobar
 
     values = []
     sheet.rows.each do |row|
@@ -35,7 +35,7 @@ This version only use string of cell format.
 
     new_sheet = ods.create_sheet
     new_sheet[1, :A].annotation = 'hint'
-    new_sheet[1, :A].text = 'baz'
+    new_sheet[1, :A].value = 'baz'
 
     ods.save
 
